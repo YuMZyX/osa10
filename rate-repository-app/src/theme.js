@@ -4,6 +4,7 @@ const theme = {
     textSecondary: '#586069',
     primary: '#0366d6',
     white: 'white',
+    grey: 'grey'
   },
   fontSizes: {
     body: 14,
@@ -19,6 +20,7 @@ const theme = {
   backgroundColors: {
     bgWhite: 'white',
     bgPrimary: '#0366d6',
+    bgMain: '#e1e4e8',
   },
   textAlignment: {
     textCenter: 'center'
