@@ -32,7 +32,7 @@ const infoStyles = StyleSheet.create({
     flexDirection: 'row',
     flexGrow: 1,
     justifyContent: 'space-around',
-    marginTop: 10,
+    marginTop: 12,
   },
   containerColumn: {
     flexDirection: 'column',
@@ -73,19 +73,19 @@ const RepositoryItem = ({ fullName, description, language, stars, forks, reviews
       <View style={infoStyles.containerRow}>
         <View style={infoStyles.containerColumn}>
           <Text fontWeight='bold' textAlign='center'>{starsChecked}</Text>
-          <Text textAlign='center' style={{ marginTop: 5 }}>Stars</Text>
+          <Text textAlign='center' style={{ marginTop: 4 }}>Stars</Text>
         </View>
         <View style={infoStyles.containerColumn}>
           <Text fontWeight='bold' textAlign='center'>{forksChecked}</Text>
-          <Text textAlign='center' style={{ marginTop: 5 }}>Forks</Text>
+          <Text textAlign='center' style={{ marginTop: 4 }}>Forks</Text>
         </View>
         <View style={infoStyles.containerColumn}>
           <Text fontWeight='bold' textAlign='center'>{reviewsChecked}</Text>
-          <Text textAlign='center' style={{ marginTop: 5 }}>Reviews</Text>
+          <Text textAlign='center' style={{ marginTop: 4 }}>Reviews</Text>
         </View>
         <View style={infoStyles.containerColumn}>
           <Text fontWeight='bold' textAlign='center'>{rating}</Text>
-          <Text textAlign='center' style={{ marginTop: 5 }}>Rating</Text>
+          <Text textAlign='center' style={{ marginTop: 4 }}>Rating</Text>
         </View>
       </View>
     </View>

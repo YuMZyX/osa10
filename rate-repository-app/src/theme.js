@@ -28,6 +28,7 @@ const theme = {
     bgWhite: 'white',
     bgPrimary: '#0366d6',
     bgMain: '#e1e4e8',
+    bgAppBar: '#24292e',
   },
   textAlignment: {
     textCenter: 'center'
