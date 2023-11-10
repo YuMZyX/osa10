@@ -10,37 +10,34 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
+export const RepositoryListContainer = ({ repositories }) => {
+  const repositoryNodes = repositories
+    ? repositories.edges.map((edge) => edge.node)
+    : [];
+
+    return (
+      <FlatList
+        data={repositoryNodes}
+        ItemSeparatorComponent={ItemSeparator}
+        renderItem={({item}) => 
+          <RepositoryItem 
+            fullName={item.fullName}
+            description={item.description}
+            language={item.language}
+            stars={item.stargazersCount}
+            forks={item.forksCount}
+            reviews={item.reviewCount}
+            rating={item.ratingAverage}
+            avatar={item.ownerAvatarUrl}
+          />}
+        keyExtractor={item => item.id}
+      />
+    );
+};
+
 const RepositoryList = () => {
-  const { data, error, loading } = useRepositories();
-  let repositoryNodes = [];
-
-  if (error) {
-    console.log(error);
-  }
-  if (!loading) {
-    repositoryNodes = data.repositories
-    ? data.repositories.edges.map(edge => edge.node)
-    : [];  
-  }
-
-  return (
-    <FlatList
-      data={repositoryNodes}
-      ItemSeparatorComponent={ItemSeparator}
-      renderItem={({item}) => 
-        <RepositoryItem 
-          fullName={item.fullName}
-          description={item.description}
-          language={item.language}
-          stars={item.stargazersCount}
-          forks={item.forksCount}
-          reviews={item.reviewCount}
-          rating={item.ratingAverage}
-          avatar={item.ownerAvatarUrl}
-        />}
-      keyExtractor={item => item.id}
-    />
-  );
+  const { repositories } = useRepositories();
+  return <RepositoryListContainer repositories={repositories} />;
 };
 
 export default RepositoryList;

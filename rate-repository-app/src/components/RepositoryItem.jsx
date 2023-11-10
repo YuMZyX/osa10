@@ -59,7 +59,7 @@ const RepositoryItem = ({ fullName, description, language, stars, forks, reviews
   const reviewsChecked = checkAmount(reviews)
 
   return (
-    <View style={repositoryStyles.container}>
+    <View style={repositoryStyles.container} testID='repositoryItem'>
       <View style={headerStyles.container}>
         <View style={headerStyles.avatarContainer}>
           <Image style={headerStyles.avatar} source={{ uri: avatar }}></Image>

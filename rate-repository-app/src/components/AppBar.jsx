@@ -1,9 +1,8 @@
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Link } from 'react-router-native'
-import { useQuery } from "@apollo/client"
+import { useQuery, useApolloClient } from "@apollo/client"
 import { ME } from './graphql/queries'
 import useAuthStorage from '../hooks/useAuthStorage'
-import { useApolloClient } from '@apollo/client';
 import Constants from 'expo-constants'
 import Text from './Text'
 import theme from '../theme'
@@ -28,8 +27,8 @@ const AppBar = () => {
   const authStorage = useAuthStorage();
   const apolloClient = useApolloClient();
 
-  const logout = () => {
-    authStorage.removeAccessToken();
+  const logout = async () => {
+    await authStorage.removeAccessToken();
     apolloClient.resetStore();
   }
 
