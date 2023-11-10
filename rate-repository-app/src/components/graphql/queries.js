@@ -26,3 +26,11 @@ export const AUTHENTICATE = gql`
     }
   }
 `
+export const ME = gql`
+query {
+  me {
+    id
+    username
+  }
+}
+`
