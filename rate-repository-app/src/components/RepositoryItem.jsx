@@ -1,5 +1,6 @@
-import { View, Image, StyleSheet } from "react-native"
+import { View, Image, StyleSheet, Pressable } from "react-native"
 import Text from "./Text"
+import { useNavigate } from "react-router-native"
 
 const repositoryStyles = StyleSheet.create({
   container: {
@@ -45,51 +46,70 @@ const descriptionStyles = StyleSheet.create({
   }
 })
 
-const RepositoryItem = ({ fullName, description, language, stars, forks, reviews, rating, avatar }) => {
+const RepositoryItem = ({ repository }) => {
+  const {
+    id,
+    fullName,
+    description,
+    language,
+    forksCount,
+    stargazersCount,
+    ratingAverage,
+    reviewCount,
+    ownerAvatarUrl,
+  } = repository;
 
   const checkAmount = (amount) => {
     if (amount >= 1000) {
-      return (amount / 1000).toFixed(1) + 'k'
+      return (amount / 1000).toFixed(1) + 'k';
     } else {
-      return amount
+      return amount;
     }
   }
-  const starsChecked = checkAmount(stars)
-  const forksChecked = checkAmount(forks)
-  const reviewsChecked = checkAmount(reviews)
+  const starsChecked = checkAmount(stargazersCount);
+  const forksChecked = checkAmount(forksCount);
+  const reviewsChecked = checkAmount(reviewCount);
+
+  const navigate = useNavigate();
+
+  const toRepositoryView = () => {
+    navigate(`/${id}`)
+  }
 
   return (
-    <View style={repositoryStyles.container} testID='repositoryItem'>
-      <View style={headerStyles.container}>
-        <View style={headerStyles.avatarContainer}>
-          <Image style={headerStyles.avatar} source={{ uri: avatar }}></Image>
+    <Pressable onPress={toRepositoryView}>
+      <View style={repositoryStyles.container} testID='repositoryItem'>
+        <View style={headerStyles.container}>
+          <View style={headerStyles.avatarContainer}>
+            <Image style={headerStyles.avatar} source={{ uri: ownerAvatarUrl }}></Image>
+          </View>
+          <View style={headerStyles.infoContainer}>
+            <Text fontSize='subheading' fontWeight='bold'>{fullName}</Text>
+            <Text style={descriptionStyles.description}>{description}</Text>
+            <Text color='white' backgroundColor='primary'>{language}</Text>
+          </View>
         </View>
-        <View style={headerStyles.infoContainer}>
-          <Text fontSize='subheading' fontWeight='bold'>{fullName}</Text>
-          <Text style={descriptionStyles.description}>{description}</Text>
-          <Text color='white' backgroundColor='primary'>{language}</Text>
+        <View style={infoStyles.containerRow}>
+          <View style={infoStyles.containerColumn}>
+            <Text fontWeight='bold' textAlign='center'>{starsChecked}</Text>
+            <Text textAlign='center' style={{ marginTop: 4 }}>Stars</Text>
+          </View>
+          <View style={infoStyles.containerColumn}>
+            <Text fontWeight='bold' textAlign='center'>{forksChecked}</Text>
+            <Text textAlign='center' style={{ marginTop: 4 }}>Forks</Text>
+          </View>
+          <View style={infoStyles.containerColumn}>
+            <Text fontWeight='bold' textAlign='center'>{reviewsChecked}</Text>
+            <Text textAlign='center' style={{ marginTop: 4 }}>Reviews</Text>
+          </View>
+          <View style={infoStyles.containerColumn}>
+            <Text fontWeight='bold' textAlign='center'>{ratingAverage}</Text>
+            <Text textAlign='center' style={{ marginTop: 4 }}>Rating</Text>
+          </View>
         </View>
       </View>
-      <View style={infoStyles.containerRow}>
-        <View style={infoStyles.containerColumn}>
-          <Text fontWeight='bold' textAlign='center'>{starsChecked}</Text>
-          <Text textAlign='center' style={{ marginTop: 4 }}>Stars</Text>
-        </View>
-        <View style={infoStyles.containerColumn}>
-          <Text fontWeight='bold' textAlign='center'>{forksChecked}</Text>
-          <Text textAlign='center' style={{ marginTop: 4 }}>Forks</Text>
-        </View>
-        <View style={infoStyles.containerColumn}>
-          <Text fontWeight='bold' textAlign='center'>{reviewsChecked}</Text>
-          <Text textAlign='center' style={{ marginTop: 4 }}>Reviews</Text>
-        </View>
-        <View style={infoStyles.containerColumn}>
-          <Text fontWeight='bold' textAlign='center'>{rating}</Text>
-          <Text textAlign='center' style={{ marginTop: 4 }}>Rating</Text>
-        </View>
-      </View>
-    </View>
+    </Pressable>
   )
 }
 
-export default RepositoryItem
+export default RepositoryItem;
