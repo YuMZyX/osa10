@@ -21,14 +21,31 @@ export const GET_REPOSITORY = gql`
       ...repositoryBaseFields
       ratingAverage
       reviewCount
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
     }
   }
   ${REPOSITORY_BASE_FIELDS}
 `
 export const AUTHENTICATE = gql`
-  mutation authenticate($username: String!, $password: String!) {
-    authenticate(credentials: { username: $username, password: $password }) {
-      ...userBaseFields
+  mutation authorize($credentials: AuthenticateInput!) {
+    authenticate(credentials: $credentials) {
+      accessToken
+      user {
+        ...userBaseFields
+      }
     }
   }
   ${USER_BASE_FIELDS}
@@ -40,4 +57,12 @@ export const ME = gql`
     }
   }
   ${USER_BASE_FIELDS}
+`
+export const CREATE_REVIEW = gql`
+  mutation createNewReview($review: CreateReviewInput) {
+    createReview(review: $review) {
+      id
+      repositoryId
+    }
+  }
 `

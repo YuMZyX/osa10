@@ -10,15 +10,26 @@ import theme from '../theme'
 const styles = StyleSheet.create({
   container: {
     paddingTop: Constants.statusBarHeight,
-    backfaceVisibility: 'visible',
     backgroundColor: theme.backgroundColors.bgAppBar,
-    flexDirection: 'row',
+  },
+  scrollView: {
+    flexDirection: 'row'
   },
   tabs: {
-    padding: 20
+    paddingTop: 15,
+    paddingLeft: 20,
+    paddingBottom: 15,
+    paddingRight: 20,
   },
   fontColor: {
     color: 'white'
+  },
+  tabsFlex: {
+    flexDirection: 'row'
+  },
+  user: {
+    color: theme.colors.primary,
+    paddingLeft: 20
   }
 })
 
@@ -38,19 +49,33 @@ const AppBar = () => {
 
   return (
     <View style={styles.container}>
-      <ScrollView horizontal>
+      {user.data.me
+        ? <Text style={styles.user}>{user.data.me.username} logged in</Text>
+        : ''
+      }
+      <ScrollView style={styles.scrollView} horizontal>
         <Link style={styles.tabs} to='/'>
           <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Repositories</Text>
         </Link>
         {user.data.me
         ?
-        <Link style={styles.tabs} onPress={logout} to='/login'>
-          <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Sign out</Text>
-        </Link>
+        <View style={styles.tabsFlex}>
+          <Link style={styles.tabs} to='/review'>
+            <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Create a review</Text>
+          </Link>
+          <Link style={styles.tabs} onPress={logout} to='/login'>
+            <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Sign out</Text>
+          </Link>
+        </View>
         :
-        <Link style={styles.tabs} to='/login'>
-          <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Sign in</Text>
-        </Link>
+        <View style={styles.tabsFlex}>
+          <Link style={styles.tabs} to='/login'>
+            <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Sign in</Text>
+          </Link>
+          <Link style={styles.tabs} to='/signup'>
+            <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Sign up</Text>
+          </Link>
+        </View>
         }
       </ScrollView>
     </View>

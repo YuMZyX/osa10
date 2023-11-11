@@ -1,12 +1,13 @@
 import { View, Image, StyleSheet, Pressable } from "react-native"
 import Text from "./Text"
 import { useNavigate } from "react-router-native"
+import theme from "../theme"
 
 const repositoryStyles = StyleSheet.create({
   container: {
     alignItems: 'stretch',
     padding: 15,
-    backgroundColor: 'white',
+    backgroundColor: theme.backgroundColors.bgWhite,
   },
 })
 const headerStyles = StyleSheet.create({
