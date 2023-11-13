@@ -30,6 +30,7 @@ const theme = {
     bgPrimary: '#0366d6',
     bgMain: '#e1e4e8',
     bgAppBar: '#24292e',
+    bgDefault: '#efefef',
   },
   textAlignment: {
     textCenter: 'center'

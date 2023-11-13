@@ -2,8 +2,8 @@ import { gql } from '@apollo/client'
 import { REPOSITORY_BASE_FIELDS, USER_BASE_FIELDS } from './fragments'
 
 export const GET_REPOSITORIES = gql`
-  query {
-    repositories {
+  query repositories($orderBy: AllRepositoriesOrderBy!, $orderDirection: OrderDirection!, $searchKeyword: String!) {
+    repositories(orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
       edges {
         node {
           ...repositoryBaseFields
@@ -63,6 +63,14 @@ export const CREATE_REVIEW = gql`
     createReview(review: $review) {
       id
       repositoryId
+    }
+  }
+`
+export const CREATE_USER = gql`
+  mutation createNewUser($user: CreateUserInput) {
+    createUser(user: $user) {
+      id
+      username
     }
   }
 `

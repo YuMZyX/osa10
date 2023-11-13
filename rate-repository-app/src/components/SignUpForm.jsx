@@ -5,6 +5,8 @@ import * as yup from 'yup'
 import theme from '../theme'
 import Text from './Text'
 import { useNavigate } from "react-router-dom";
+import useSignIn from '../hooks/useSignIn'
+import useSignUp from '../hooks/useSignUp'
 
 const styles = StyleSheet.create({
   container: {
@@ -47,16 +49,18 @@ const validationSchema = yup.object().shape({
 
 const SignUpForm = () => {
   const navigate = useNavigate();
+  const [signIn] = useSignIn();
+  const [signUp] = useSignUp();
   
 
   const onSubmit = async (values) => {
     const { username, password } = values;
 
     try {
-      console.log(username, password)
-      //const review = await createReview({ ownerName, rating, repositoryName, text })
-      //const repositoryId = review.createReview.repositoryId
-      //console.log(repositoryId)
+      const user = await signUp({ username, password })
+      if (user.createUser.username) {
+        await signIn({ username, password });
+      }
       navigate('/');
     } catch (e) {
       console.log(e);

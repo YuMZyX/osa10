@@ -87,7 +87,7 @@ const RepositoryItem = ({ repository }) => {
           <View style={headerStyles.infoContainer}>
             <Text fontSize='subheading' fontWeight='bold'>{fullName}</Text>
             <Text style={descriptionStyles.description}>{description}</Text>
-            <Text color='white' backgroundColor='primary'>{language}</Text>
+            {language && <Text color='white' backgroundColor='primary'>{language}</Text>}
           </View>
         </View>
         <View style={infoStyles.containerRow}>
