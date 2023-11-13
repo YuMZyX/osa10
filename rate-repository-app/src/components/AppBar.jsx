@@ -49,10 +49,7 @@ const AppBar = () => {
 
   return (
     <View style={styles.container}>
-      {user.data.me
-        ? <Text style={styles.user}>{user.data.me.username} logged in</Text>
-        : ''
-      }
+      {user.data.me && <Text style={styles.user}>{user.data.me.username} signed in</Text>}
       <ScrollView style={styles.scrollView} horizontal>
         <Link style={styles.tabs} to='/'>
           <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Repositories</Text>
@@ -62,6 +59,9 @@ const AppBar = () => {
         <View style={styles.tabsFlex}>
           <Link style={styles.tabs} to='/review'>
             <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Create a review</Text>
+          </Link>
+          <Link style={styles.tabs} to='/myreviews'>
+            <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>My reviews</Text>
           </Link>
           <Link style={styles.tabs} onPress={logout} to='/login'>
             <Text fontSize='subheading' fontWeight='bold' style={styles.fontColor}>Sign out</Text>

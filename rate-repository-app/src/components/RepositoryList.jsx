@@ -16,7 +16,9 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories, setSearch, search, setOrderBy, setOrderDirection }) => {
+export const RepositoryListContainer = ({ repositories, onEndReach, 
+  setSearch, search, setOrderBy, setOrderDirection }) => {
+    
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : [];
@@ -30,6 +32,8 @@ export const RepositoryListContainer = ({ repositories, setSearch, search, setOr
         keyExtractor={item => item.id}
         ListHeaderComponent={<RepositoryListHeader setSearch={setSearch} search={search}
           setOrderBy={setOrderBy} setOrderDirection={setOrderDirection} />}
+        onEndReached={onEndReach}
+        onEndReachedThreshold={0.5}
       />
     );
 };
@@ -40,9 +44,27 @@ const RepositoryList = () => {
   const [search, setSearch] = useState('');
   const [searchKeyword] = useDebounce(search, 500);
 
-  const { repositories } = useRepositories({ orderBy, orderDirection, searchKeyword });
-  return <RepositoryListContainer repositories={repositories} setSearch={setSearch}
-    search={search} setOrderBy={setOrderBy} setOrderDirection={setOrderDirection} />;
+  const { repositories, fetchMore } = useRepositories({ 
+    first: 8,
+    orderBy, 
+    orderDirection, 
+    searchKeyword 
+  });
+
+  const onEndReach = () => {
+    fetchMore();
+  };
+
+  return (
+    <RepositoryListContainer 
+      repositories={repositories}
+      onEndReach={onEndReach}
+      setSearch={setSearch}
+      search={search} 
+      setOrderBy={setOrderBy} 
+      setOrderDirection={setOrderDirection} 
+    />
+  )
 };
 
 export default RepositoryList;

@@ -2,26 +2,34 @@ import { gql } from '@apollo/client'
 import { REPOSITORY_BASE_FIELDS, USER_BASE_FIELDS } from './fragments'
 
 export const GET_REPOSITORIES = gql`
-  query repositories($orderBy: AllRepositoriesOrderBy!, $orderDirection: OrderDirection!, $searchKeyword: String!) {
-    repositories(orderBy: $orderBy, orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
+  query repositories($after: String, $first: Int, $orderBy: AllRepositoriesOrderBy!, 
+    $orderDirection: OrderDirection!, $searchKeyword: String!) {
+    repositories(after: $after, first: $first, orderBy: $orderBy, 
+      orderDirection: $orderDirection, searchKeyword: $searchKeyword) {
       edges {
         node {
           ...repositoryBaseFields
           ratingAverage
           reviewCount
         }
+        cursor
+      }
+      pageInfo {
+        endCursor
+        startCursor
+        hasNextPage
       }
     }
   }
   ${REPOSITORY_BASE_FIELDS}
 `
 export const GET_REPOSITORY = gql`
-  query repository($repositoryId: ID!) {
+  query repository($repositoryId: ID!, $after: String, $first: Int) {
     repository(id: $repositoryId) {
       ...repositoryBaseFields
       ratingAverage
       reviewCount
-      reviews {
+      reviews(first: $first, after: $after) {
         edges {
           node {
             id
@@ -32,7 +40,16 @@ export const GET_REPOSITORY = gql`
               id
               username
             }
+            repository {
+              fullName
+            }
           }
+          cursor
+        }
+        pageInfo {
+          endCursor
+          startCursor
+          hasNextPage
         }
       }
     }
@@ -51,9 +68,27 @@ export const AUTHENTICATE = gql`
   ${USER_BASE_FIELDS}
 `
 export const ME = gql`
-  query {
+  query getCurrentUser($includeReviews: Boolean = false) {
     me {
       ...userBaseFields
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            repository {
+              id
+              fullName
+            }
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
     }
   }
   ${USER_BASE_FIELDS}
@@ -72,5 +107,10 @@ export const CREATE_USER = gql`
       id
       username
     }
+  }
+`
+export const DELETE_REVIEW = gql`
+  mutation removeReview($deleteReviewId: ID!) {
+    deleteReview(id: $deleteReviewId)
   }
 `

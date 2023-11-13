@@ -22,7 +22,7 @@ const RepositoryInfo = ({ repository }) => {
     <View>
       <RepositoryItem repository={repository} button={true} />
       <View style={styles.container}>
-        <Button onPress={openURL} style={styles.button}>Open in GitHub</Button>
+        <Button onPress={openURL}>Open in GitHub</Button>
       </View>
     </View>
   )
