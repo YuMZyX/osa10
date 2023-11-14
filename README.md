@@ -12,4 +12,4 @@ Signed in users can also:
 - See a list of reviews created by yourself.
 - Delete reviews created by yourself.
 
-
+![Screenshot_1699975164](https://github.com/YuMZyX/osa10/assets/145103073/aadb9806-1cf2-4930-83fe-ae89637013cc)
