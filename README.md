@@ -1,2 +1,15 @@
-# osa10
-Full stack open kurssin osa10 repositorio.
+# Rate repository app
+Rate repository app created with React Native. 
+API for the application has been created by Kalle Ilves from Helsinki University.
+
+Anonymous users have following features:
+- A list of public GitHub repositories that have been reviewed in the app, including their avatar, fork count, code language, star count, review count, rating and description.
+- Possibility to click/press any repository in the list to see their reviews and to see a button leading to the repository itself.
+- Possibility to sign up and sign in
+
+Signed in users can also:
+- Create reviews for any public GitHub repositories including ones that are not yet listed in the application
+- See a list of reviews created by yourself.
+- Delete reviews created by yourself.
+
+
