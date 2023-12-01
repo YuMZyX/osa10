@@ -1,16 +1,33 @@
-# Rate repository app
-Rate repository app created with React Native. 
-API for the application has been created by Kalle Ilves from Helsinki University.
+# Full Stack Open - Part 10 (React Native)
 
-Anonymous users have following features:
-- A list of public GitHub repositories that have been reviewed in the app, including their avatar, fork count, code language, star count, review count, rating and description.
-- Possibility to click/press any repository in the list to see their reviews and to see a button leading to the repository itself.
-- Possibility to sign up and sign in
+1. Introduction to React Native
 
-Signed in users can also:
-- Create reviews for any public GitHub repositories including ones that are not yet listed in the application
-- See a list of reviews created by yourself.
-- Delete reviews created by yourself.
+    - Initializing Expo application
+    - Setting up development environment
+    - Android/ios emulators
+    - Expo Go
+    - ESLint & Debugging
+  
+2. React Native basics
 
+    - Core components
+    - Styling and theming applications
+    - Flexbox layouts
+    - Routing
+    - Form state management & validation
+    - Platform-specific code
+  
+3. Communicating with server
 
-![image](https://github.com/YuMZyX/osa10/assets/145103073/01092a29-c746-475e-8478-9a5f1e32e754)
+    - HTTP requests in React Native
+    - GraphQL and Apollo client in React Native
+    - Environment variables in mobile apps
+    - Storing data in the user's device
+    - React Context for dependency injection
+  
+4. Testing and extending
+
+    - React Native Testing Library
+    - Organizing tests & handling dependencies
+    - Cursor-based pagination
+    - Infinite scrolling
